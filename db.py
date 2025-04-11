@@ -2,7 +2,7 @@ import sqlite3
 import pandas as pd
 
 def get_connection():
-    return sqlite3.connect("workout_tracker.db", check_same_thread=False)
+    return sqlite3.connect("lift.db", check_same_thread=False)
 
 conn = get_connection()
 c = conn.cursor()
@@ -37,11 +37,11 @@ def create_tables():
     conn.commit()
     initialize_default_catalog_if_empty()
 
-def insert_exercise(date, exercise, set_number, weight, reps, duration, rest, note="", side=None):
+def insert_exercise(date, exercise, set_number, total_weight, reps, duration, rest, note="", side=None):
     c.execute('''
     INSERT INTO exercises (date, exercise, set_number, weight, reps, duration, rest, note, side)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-    ''', (date, exercise, set_number, weight, reps, duration, rest, note, side))
+    ''', (date, exercise, set_number, total_weight, reps, duration, rest, note, side))
     conn.commit()
 
 def get_exercise_log():
@@ -86,11 +86,25 @@ def initialize_default_catalog_if_empty():
     result = c.execute('SELECT COUNT(*) FROM exercise_catalog').fetchone()
     if result[0] == 0:
         default_exercises = [
+            ("Barbell Back Squat", "Barbell", 45.0, "Bilateral", "Reps"),
             ("Barbell Bench Press", "Barbell", 45.0, "Bilateral", "Reps"),
-            ("Dumbbell Curl", "Dumbbell", 0.0, "Unilateral", "Reps"),
-            ("Barbell Squat", "Barbell", 45.0, "Bilateral", "Reps"),
-            ("Plank", "Bodyweight", 0.0, "Unilateral", "Duration"),
-            ("Wall Sit", "Bodyweight", 0.0, "Unilateral", "Duration")
+            ("Barbell Deadlift", "Barbell", 45.0, "Bilateral", "Reps"),
+            ("Barbell Overhead Press", "Barbell", 45.0, "Bilateral", "Reps"),
+            ("Barbell Row", "Barbell", 45.0, "Bilateral", "Reps"),
+            ("Dumbbell Bulgarian Split Squat", "Dumbbell", 0.0, "Unilateral", "Reps"),
+            ("Dumbbell Calf Raise", "Dumbbell", 0.0, "Bilateral", "Reps"),
+            ("Dumbbell Farmer Carry", "Dumbbell", 0.0, "Bilateral", "Duration"),
+            ("Dumbbell Hammer Curl", "Dumbbell", 0.0, "Unilateral", "Reps"),
+            ("Dumbbell Incline Bench Press", "Dumbbell", 0.0, "Bilateral", "Reps"),
+            ("Dumbbell Lateral Raise", "Dumbbell", 0.0, "Unilateral", "Reps"),
+            ("Dumbbell One Arm Row", "Dumbbell", 0.0, "Unilateral", "Reps"),
+            ("Dumbbell Reverse Lunge", "Dumbbell", 0.0, "Unilateral", "Reps"),
+            ("Dumbbell Skull Crusher", "Dumbbell", 0.0, "Bilateral", "Reps"),
+            ("Dumbbell Shrug", "Dumbbell", 0.0, "Bilateral", "Duration"),
+            ("Dumbbell Side Bend", "Dumbbell", 0.0, "Bilateral", "Reps"),
+            ("Glute Bridge", "Bodyweight", 0.0, "Bilateral", "Reps"),
+            ("Plank", "Bodyweight", 0.0, "Bilateral", "Duration"),
+            ("Pull Up", "Bodyweight", 0.0, "Bilateral", "Reps")
         ]
         for ex in default_exercises:
             insert_catalog_entry(*ex)

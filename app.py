@@ -33,46 +33,55 @@ with tabs[0]:
             "Set": list(range(1, set_count + 1)),
             "Weight": [None] * set_count,
         }
-        if measured_by == "reps":
+        if measured_by == "Reps":
             columns["Reps"] = [None] * set_count
-            columns["Note"] = ["" for _ in range(set_count)]
-        elif measured_by == "duration":
+        elif measured_by == "Duration":
             columns["Duration"] = [None] * set_count
-            columns["Note"] = ["" for _ in range(set_count)]
-        else:
-            columns["Note"] = ["" for _ in range(set_count)]
 
         if is_unilateral:
             columns["Side"] = sides
+
+        columns["Note"] = ["" for _ in range(set_count)]
+
+        column_order = ["Set", "Weight"]
+        if "Reps" in columns: column_order.append("Reps")
+        if "Duration" in columns: column_order.append("Duration")
+        if "Side" in columns: column_order.append("Side")
+        column_order.append("Note")
 
         st.session_state.exercise_meta = {
             "date": entry_date.strftime("%m/%d/%Y"),
             "exercise": selected_exercise,
             "total_sets": set_count,
             "rest": rest_period,
-            "sides": sides
+            "sides": sides,
+            "equipment": meta["equipment"],
+            "weight": meta["weight"]
         }
-        st.session_state.exercise_df = pd.DataFrame(columns)
+        st.session_state.exercise_df = pd.DataFrame({col: columns[col] for col in column_order})
 
     if "exercise_df" in st.session_state and "exercise_meta" in st.session_state:
         meta_ex = st.session_state.exercise_meta
         with st.form("exercise_details_form"):
             st.subheader(f"Enter details for {meta_ex['exercise']}")
             st.caption(f"Rest Period: {meta_ex['rest']} seconds")
+            if meta_ex["equipment"] == "Barbell":
+                st.caption(f"{meta_ex['weight']} lbs will be added for barbell when exercise is saved")
             edited_df = st.data_editor(st.session_state.exercise_df, use_container_width=True, hide_index=True)
             st.session_state.exercise_df = edited_df
             if st.form_submit_button("Save Exercise"):
                 for _, row in st.session_state.exercise_df.iterrows():
+                    total_weight = float(row.get("Weight") or 0) + float(meta_ex["weight"] if meta_ex["equipment"] == "Barbell" else 0)
                     db.insert_exercise(
                         meta_ex["date"],
                         meta_ex["exercise"],
                         int(row["Set"]),
-                        row.get("Weight"),
+                        total_weight,
                         row.get("Reps"),
+                        row.get("Duration"),
                         meta_ex["rest"],
                         row["Note"],
-                        row.get("Side"),
-                        row.get("Duration")
+                        row.get("Side")
                     )
                 st.success("Exercise entry saved!")
                 del st.session_state.exercise_meta
@@ -97,7 +106,7 @@ with tabs[0]:
         "duration": "Duration"
     }, inplace=True)
 
-    current_entries = current_entries[["Date", "Exercise", "Set", "Side", "Weight", "Duration", "Reps", "Rest", "Note"]]
+    current_entries = current_entries[["Date", "Exercise", "Set", "Weight", "Reps", "Duration", "Side", "Rest", "Note"]]
 
     st.subheader("Today's Exercise Entries")
     st.dataframe(current_entries, hide_index=True, use_container_width=True)
@@ -109,7 +118,7 @@ with tabs[1]:
     if log_df.empty:
         st.info("No exercise entries available.")
     else:
-        display_df = log_df[["Date", "Exercise", "Set", "Side", "Weight", "Duration", "Reps", "Rest", "Note"]].copy()
+        display_df = log_df[["Date", "Exercise", "Set", "Weight", "Reps", "Duration", "Side", "Rest", "Note"]].copy()
         edited_log = st.data_editor(display_df, use_container_width=True, num_rows="dynamic")
         if st.button("Save Log Changes"):
             for _, row in edited_log.iterrows():
