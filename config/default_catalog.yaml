@@ -1,0 +1,146 @@
+- exercise: Barbell Back Squat
+  equipment: Barbell
+  weight: 45.0
+  measured_by: Reps
+  muscle_groups:
+  - Quadriceps
+  - Hamstrings
+  - Gluteals
+  - Core
+- exercise: Barbell Bench Press
+  equipment: Barbell
+  weight: 45.0
+  measured_by: Reps
+  muscle_groups:
+  - Chest
+  - Triceps
+  - Shoulders
+- exercise: Barbell Deadlift
+  equipment: Barbell
+  weight: 45.0
+  measured_by: Reps
+  muscle_groups:
+  - Hamstrings
+  - Gluteals
+  - Back
+- exercise: Barbell Overhead Press
+  equipment: Barbell
+  weight: 45.0
+  measured_by: Reps
+  muscle_groups:
+  - Shoulders
+  - Triceps
+- exercise: Barbell Row
+  equipment: Barbell
+  weight: 45.0
+  measured_by: Reps
+  muscle_groups:
+  - Back
+  - Biceps
+- exercise: Dumbbell Bulgarian Split Squat
+  equipment: Dumbbell
+  weight: 0.0
+  measured_by: Reps
+  muscle_groups:
+  - Quadriceps
+  - Gluteals
+- exercise: Dumbbell Calf Raise
+  equipment: Dumbbell
+  weight: 0.0
+  measured_by: Reps
+  muscle_groups:
+  - Calves
+- exercise: Dumbbell Farmer Carry
+  equipment: Dumbbell
+  weight: 0.0
+  measured_by: Duration
+  muscle_groups:
+  - Core
+  - Grip
+- exercise: Dumbbell Hammer Curl
+  equipment: Dumbbell
+  weight: 0.0
+  measured_by: Reps
+  muscle_groups:
+  - Biceps
+- exercise: Dumbbell Incline Bench Press
+  equipment: Dumbbell
+  weight: 0.0
+  measured_by: Reps
+  muscle_groups:
+  - Chest
+  - Shoulders
+- exercise: Dumbbell Lateral Raise
+  equipment: Dumbbell
+  weight: 0.0
+  measured_by: Reps
+  muscle_groups:
+  - Shoulders
+- exercise: Dumbbell One Arm Row
+  equipment: Dumbbell
+  weight: 0.0
+  measured_by: Reps
+  muscle_groups:
+  - Back
+  - Biceps
+- exercise: Dumbbell Reverse Lunge
+  equipment: Dumbbell
+  weight: 0.0
+  measured_by: Reps
+  muscle_groups:
+  - Quadriceps
+  - Gluteals
+- exercise: Dumbbell Skull Crusher
+  equipment: Dumbbell
+  weight: 0.0
+  measured_by: Reps
+  muscle_groups:
+  - Triceps
+- exercise: Dumbbell Shrug
+  equipment: Dumbbell
+  weight: 0.0
+  measured_by: Duration
+  muscle_groups:
+  - Trapezius
+- exercise: Dumbbell Side Bend
+  equipment: Dumbbell
+  weight: 0.0
+  measured_by: Reps
+  muscle_groups:
+  - Obliques
+- exercise: Glute Bridge
+  equipment: Bodyweight
+  weight: 0.0
+  measured_by: Reps
+  muscle_groups:
+  - Gluteals
+  - Hamstrings
+- exercise: Plank
+  equipment: Bodyweight
+  weight: 0.0
+  measured_by: Duration
+  muscle_groups:
+  - Core
+- exercise: Sit Up
+  equipment: Bodyweight
+  weight: 0.0
+  measured_by: Reps
+  muscle_groups:
+  - Core
+- exercise: Pull Up
+  equipment: Bodyweight
+  weight: 0.0
+  measured_by: Reps
+  muscle_groups:
+  - Back
+  - Biceps
+  optional_equipment:
+  - Weighted Vest
+- exercise: Dumbbell Arnold Press
+  equipment: Dumbbell
+  weight: 0.0
+  measured_by: Reps
+  muscle_groups:
+  - Shoulders
+  - Triceps
+  - Core
