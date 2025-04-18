@@ -90,6 +90,13 @@
   muscle_groups:
   - Quadriceps
   - Gluteals
+- exercise: Dumbbell Seated Overhead Press
+  equipment: Dumbbell
+  weight: 0.0
+  measured_by: Reps
+  muscle_groups:
+  - Shoulders
+  - Triceps
 - exercise: Dumbbell Skull Crusher
   equipment: Dumbbell
   weight: 0.0
@@ -99,7 +106,7 @@
 - exercise: Dumbbell Shrug
   equipment: Dumbbell
   weight: 0.0
-  measured_by: Duration
+  measured_by: Reps
   muscle_groups:
   - Trapezius
 - exercise: Dumbbell Side Bend
